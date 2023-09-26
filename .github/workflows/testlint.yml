@@ -17,4 +17,4 @@ jobs:
         run: |
           shopt -s globstar # enable globbing
           cfn-lint --version
-          cfn-lint -t ./**/*.yaml
+          cfn-lint -t ./**/*.yml
