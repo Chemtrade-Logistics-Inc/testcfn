@@ -2,7 +2,7 @@ Resources:
   CTLHTTPSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Enable port 80 and port 443
+      GroupDescription: Enable port 80 and port 443 test
       SecurityGroupIngress:
       - CidrIp: 0.0.0.0/0
         FromPort: 80
