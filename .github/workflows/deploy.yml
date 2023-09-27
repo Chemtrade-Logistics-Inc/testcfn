@@ -39,6 +39,6 @@ jobs:
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: harish-test-stack
-          template: test-stack.yaml
+          template: https://github.com/Chemtrade-Logistics-Inc/testcfn/blob/c9d2ac0359e14e66299c536c59978267280dd95b/test-stack.yml
           no-fail-on-empty-changeset: "1"
           parameter-overrides: "EC2InstanceType=t2.micro"
