@@ -48,4 +48,4 @@ jobs:
           name: harish-test-stack
           template: ./cloudformation/test-stack.yml
           no-fail-on-empty-changeset: "1"
-          parameter-overrides: ""
+          parameter-overrides: "Environment=Test"
