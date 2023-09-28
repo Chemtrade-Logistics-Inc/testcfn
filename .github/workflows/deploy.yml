@@ -28,8 +28,6 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
-    - name: Publish
-      run: dotnet publish --no-self-contained --runtime linux-x64 --configuration Release --output ./artifact/publish ./cloudformation/*.yml
     - name: Copy
       run: cp ./cloudformation/*.yml  ./artifact/*.yml
 
