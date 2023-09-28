@@ -29,12 +29,12 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Copy
-      run: cp ./cloudformation/*.yml  ./artifact/*.yml
+      run: cp ./cloudformation/test-stack.yml  ./artifact/test-stack.yml
 
     - uses: actions/upload-artifact@v3
       with:
         name: cfncode
-        path: ./artifact
+        path: ./artifact/test-stack.yml
     # Configure AWS Credential
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
