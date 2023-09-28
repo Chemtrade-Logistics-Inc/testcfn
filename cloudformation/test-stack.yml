@@ -4,11 +4,31 @@ Parameters:
   Environment:
     Description: Environment Name
     Type: String
+  mysgname:
+    Description: "security group name"
+    Type: String
+    Default: ctl-test-cfn-sg
+  myvpcname:
+    Description: "vpc name name"
+    Type: String
+    Default: vpc-0f6a958792a2d3c83
 Resources:
   CTLHTTPSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Enable port 80 and port 443 test
+      GroupDescription: "SG for Prod Mobility environment"
+      GroupName: !Ref mysgname
+      VpcId: !Ref myvpcname
+      Tags:
+        - Key: "projectid"
+          Value: "ctcd"
+        - Key: "projectname"
+          Value: "aws-green"
+        - Key: "environment"
+          Value: "production"
+        - Key: "application"
+          Value: "sap"
+       
       SecurityGroupIngress:
       - CidrIp: 0.0.0.0/0
         FromPort: 80
