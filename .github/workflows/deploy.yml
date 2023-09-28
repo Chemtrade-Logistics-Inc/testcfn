@@ -23,22 +23,35 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout code from master branch
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Publish
+      run: dotnet publish --no-self-contained --runtime linux-x64 --configuration Release --output ./artifact/publish ./cloudformation/*.yml
+    - name: Copy
+      run: cp ./cloudformation/*.yml  ./artifact/*.yml
 
-      # Configure AWS Credential
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
+    - uses: actions/upload-artifact@v3
+      with:
+        name: cfncode
+        path: ./artifact
+    # Configure AWS Credential
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
           aws-access-key-id: ${{ secrets.ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
           aws-region: ${{ github.event.inputs.region }}
 
-      # Deploy to AWS CloudFormation
-      - name: Deploy to AWS CloudFormation
-        uses: aws-actions/aws-cloudformation-github-deploy@v1
-        with:
+    - name: Upload to S3
+      run: aws s3 cp ./artifact/test-stack.yml s3://cfndemo-bucket
+    # Deploy to AWS CloudFormation
+    - name: Deploy to AWS CloudFormation
+      uses: aws-actions/aws-cloudformation-github-deploy@v1
+      with:
           name: harish-test-stack
-          template: testcfn/test-stack.yml
+          template: s3://cfndemo-bucket/test-stack.yml
           no-fail-on-empty-changeset: "1"
-          parameter-overrides: "EC2InstanceType=t2.micro"
+          parameter-overrides: ""
