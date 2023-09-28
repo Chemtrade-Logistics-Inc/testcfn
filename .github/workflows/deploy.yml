@@ -24,10 +24,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
     - name: Copy
       run: cp ./cloudformation/test-stack.yml  ./artifact/test-stack.yml
 
@@ -50,6 +46,6 @@ jobs:
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
           name: harish-test-stack
-          template: s3://cfndemo-bucket/test-stack.yml
+          template: ./cloudformation/test-stack.yml
           no-fail-on-empty-changeset: "1"
           parameter-overrides: ""
