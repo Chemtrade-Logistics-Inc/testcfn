@@ -7,7 +7,7 @@ Parameters:
   mysgname:
     Description: "security group name"
     Type: String
-    Default: ctl-test-cfn-sg
+    Default: ctl-test-cfn-sg-test
   myvpcname:
     Description: "vpc name name"
     Type: String
@@ -16,7 +16,7 @@ Resources:
   CTLHTTPSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "SG for Prod Mobility environment"
+      GroupDescription: "SG for Prod Mobility environment test"
       GroupName: !Ref mysgname
       VpcId: !Ref myvpcname
       Tags:
@@ -42,3 +42,7 @@ Resources:
         FromPort: 445
         IpProtocol: tcp
         ToPort: 445
+      - CidrIp: 0.0.0.0/0
+        FromPort: 449
+        IpProtocol: tcp
+        ToPort: 449
