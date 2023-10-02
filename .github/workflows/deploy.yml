@@ -45,7 +45,7 @@ jobs:
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
-          name: harish-test-stack
+          name:  ${{ secrets.STACK_NAME }}
           template: ./cloudformation/test-stack.yml
           no-fail-on-empty-changeset: "1"
           parameter-overrides: "Environment=Test"
