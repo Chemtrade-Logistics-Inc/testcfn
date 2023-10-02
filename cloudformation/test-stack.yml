@@ -43,6 +43,10 @@ Resources:
         IpProtocol: tcp
         ToPort: 445
       - CidrIp: 0.0.0.0/0
-        FromPort: 449
+        FromPort: 447
         IpProtocol: tcp
-        ToPort: 449
+        ToPort: 447
+      - CidrIp: 0.0.0.0/0
+        FromPort: 447
+        IpProtocol: tcp
+        ToPort: 447
