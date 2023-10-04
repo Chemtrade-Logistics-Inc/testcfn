@@ -23,5 +23,5 @@ jobs:
 
     - name: Print Outputs
       run: |
-        echo "Cluster Name: ${{ steps.yaml-output.outputs.stack-name }}"
-        echo "App Name: ${{ steps.yaml-output.outputs.stack-file }}"    
+        echo "Stack Name: ${{ steps.yaml-output.outputs.stack-name }}"
+        echo "Stack File: ${{ steps.yaml-output.outputs.stack-file }}"    
