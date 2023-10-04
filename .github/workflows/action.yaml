@@ -1,4 +1,4 @@
-name: Example Workflow
+name: Cloudformation diff 
 
 on: [push]
 
