@@ -1,17 +1,27 @@
-on: [ push ]
+name: Example Workflow
+
+on: [push, pull_request]
 
 jobs:
-  test-yaml-reader:
+  example_job:
     runs-on: ubuntu-latest
-    name: Test read-yaml
     steps:
-      - uses: actions/checkout@v1
-      - name: Run read-yaml action
-        id: yaml-data
-        uses: jbutcher5/read-yaml@main      # You may wish to replace main with a version tag such as '1.6' etc.
-        with:
-          file: './cloudformation/stack-var.yml'          # File to read from
-          key-path: '["runs", "using"]' # Access the runs key then the using key and retuns the value.
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Display read-yaml output
-        run: echo "${{ steps.yaml-data.outputs.data }}"
+    - name: Run YAML to Github Output Action
+      id: yaml-output
+      uses: christian-ci/action-yaml-github-output@v2
+      with:
+        file_path: ./cloudformation/stack-var.yml
+        main_key: stackfilevar
+
+    - name: Print Variables
+      run: |
+        echo "Stack Name: ${{ env.STACK_NAME }}"
+        echo "Stack File: ${{ env.STACK_FILE }}"
+
+    - name: Print Outputs
+      run: |
+        echo "Cluster Name: ${{ steps.yaml-output.outputs.stack-name }}"
+        echo "App Name: ${{ steps.yaml-output.outputs.stack-file }}"    
