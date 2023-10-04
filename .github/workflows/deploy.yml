@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v3
     - name: Copy
-      run: cp ./cloudformation/test-stack.yml  ./artifact/test-stack.yml
+      run: cp {{secrets.STACK_FILE}}  ./artifact/test-stack.yml
 
     - uses: actions/upload-artifact@v3
       with:
@@ -39,13 +39,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
           aws-region: ${{ github.event.inputs.region }}
 
-    - name: Upload to S3
+    - name: Upload to S3 Bucket
       run: aws s3 cp ./artifact/test-stack.yml s3://cfndemo-bucket
     # Deploy to AWS CloudFormation
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
           name:  ${{ secrets.STACK_NAME }}
-          template: ./cloudformation/test-stack.yml
+          template: ${{secrets.STACK_FILE}}
           no-fail-on-empty-changeset: "1"
           parameter-overrides: "Environment=Test"
