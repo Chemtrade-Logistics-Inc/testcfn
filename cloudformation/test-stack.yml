@@ -28,6 +28,9 @@ Resources:
           Value: "production"
         - Key: "application"
           Value: "sap"
+        - Key: "application-env"
+          Value: !Ref Environment
+       
        
       SecurityGroupIngress:
       - CidrIp: 0.0.0.0/0
