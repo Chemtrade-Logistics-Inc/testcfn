@@ -1,6 +1,6 @@
 name: Example Workflow
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   example_job:
@@ -24,4 +24,29 @@ jobs:
     - name: Print Outputs
       run: |
         echo "Stack Name: ${{ steps.yaml-output.outputs.stack-name }}"
-        echo "Stack File: ${{ steps.yaml-output.outputs.stack-file }}"    
+        echo "Stack File: ${{ steps.yaml-output.outputs.stack-file }}" 
+
+    - name: Set STACK Name
+        # You may pin to the exact commit or the version.
+        # uses: action-pack/set-secret@4e7be4fb208cf00c083efb45a6101dd65a8eea78
+      uses: action-pack/set-secret@v1
+      with:
+          # Secret name
+          name: STACK_NAME
+          # Secret value
+          value: ${{env.STACK_NAME}}
+          # Repository access token
+          token: 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
+      
+    - name: Set STACK File
+        # You may pin to the exact commit or the version.
+        # uses: action-pack/set-secret@4e7be4fb208cf00c083efb45a6101dd65a8eea78
+      uses: action-pack/set-secret@v1
+      with:
+          # Secret name
+          name: STACK_FILE
+          # Secret value
+          value: ${{env.STACK_FILE}}
+          # Repository access token
+          token: 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
+      
