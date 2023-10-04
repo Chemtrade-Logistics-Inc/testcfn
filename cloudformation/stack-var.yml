@@ -1,3 +1,3 @@
 stackfilevar:
-    stack-name: us-cluster
-    stack-file: us-demo-app
+    stack-name: test-stack-var-file
+    stack-file: ./cloudformation/test-stack.yml
