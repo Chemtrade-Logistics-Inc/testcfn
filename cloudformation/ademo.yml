@@ -7,7 +7,7 @@ Parameters:
   mysgname:
     Description: "security group name"
     Type: String
-    Default: ctl-test-cfn-sg-demo1
+    Default: ctl-test-cfn-sg-demo2
   myvpcname:
     Description: "vpc name name"
     Type: String
