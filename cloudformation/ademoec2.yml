@@ -6,6 +6,7 @@ Parameters:
     Default: "us-east-1"
 
   AZToDeploy:
+    Type: String
     Default: us-east-1a
 
   VpcId: 
