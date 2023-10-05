@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: CloudFormation template for s3 bucket
+
+Parameters:
+  Environment:
+    Description: Environment Name
+    Type: String
+  mybucketName: 
+    Type: String
+    Default: devopstest
+Resources:
+  S3Bucket:
+    DeletionPolicy: Retain
+    Type: 'AWS::S3::Bucket'
+    Description: Codepipeline s3 bucket Test
+    Properties:
+      BucketName: !Ref mybucketName
+      AccessControl: Private
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      VersioningConfiguration:
+        Status: Enabled
+      Tags: 
+        - Key: "projectid"
+          Value: "ctcd"
+        - Key: "projectname"
+          Value: "aws-green"
+        - Key: "environment"
+          Value: !Ref Environment
+        - Key: "Retention"
+          Value: "temp"
