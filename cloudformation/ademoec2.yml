@@ -1,5 +1,9 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Parameters: 
+  Environment:
+    Description: Environment Name
+    Type: String
+    Default: "test"
   Region:
     Description: "Region of instances"
     Type: String
@@ -43,6 +47,8 @@ Resources:
           Value: "ECC demo server"
         - Key: "Name"
           Value: "demoec2"
+        - Key: "Environment"
+          Value: !Ref Environment
 
       BlockDeviceMappings:
         - DeviceName: /dev/sda1
