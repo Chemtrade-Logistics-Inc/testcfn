@@ -1,6 +1,8 @@
 name: Cloudformation diff 
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
 
 jobs:
   cfn-diff:
