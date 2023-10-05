@@ -3,7 +3,7 @@ name: Cloudformation diff
 on: [push]
 
 jobs:
-  example_job:
+  cfn-diff:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -49,4 +49,35 @@ jobs:
           value: ${{env.STACK_FILE}}
           # Repository access token
           token: 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
-      
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v3
+    - name: Copy
+      run: cp ${{secrets.STACK_FILE}}  ./artifact/test-stack.yml
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: cfncode
+        path: ./artifact/test-stack.yml
+    # Configure AWS Credential
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
+          aws-region: ${{secrets.AWS_REGION }}
+
+    - name: Upload to S3 Bucket
+      run: aws s3 cp ./artifact/test-stack.yml s3://cfndemo-bucket
+    # Deploy to AWS CloudFormation
+    - name: Deploy to AWS CloudFormation
+      uses: aws-actions/aws-cloudformation-github-deploy@v1
+      with:
+          name:  ${{ secrets.STACK_NAME }}
+          template: ${{secrets.STACK_FILE}}
+          no-fail-on-empty-changeset: "1"
+          parameter-overrides: "Environment=Test"
