@@ -35,4 +35,4 @@ Resources:
         - Key: "environment"
           Value: !Ref Environment
         - Key: "Retention"
-          Value: "temp"
+          Value: "temp1"
