@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: "Cloud formation template for security group"
 stackfilevar:
-    stack-name: test-stack-var-file-demo1
+    stack-name: test-stack-var-file-demo2
     stack-file: ./cloudformation/ademo.yml
