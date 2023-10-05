@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Parameters: 
+  Region:
+    Description: "Region of instances"
+    Type: String
+    Default: "us-east-1"
+
+  AZToDeploy:
+    Type: AWS::EC2::AvailabilityZone::Name
+
+  VpcId: 
+    Type: String
+    Default: vpc-0f6a958792a2d3c83
+
+  AMIId: 
+    Type: String
+    Default:  ami-06afe81980bde9f79
+
+Resources: 
+  Demoec2linux: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      AvailabilityZone: us-east-1a
+      ImageId: ami-05548f9cecf47b442
+      InstanceInitiatedShutdownBehavior: "stop"
+      InstanceType: "t2.nano"
+      KeyName: instance-connect-ec2
+      SubnetId: subnet-0ff36bccb29c7cb15
+      SecurityGroupIds: 
+        - sg-0e3ee3de3b5437458
+      DisableApiTermination: true
+      Monitoring: true
+      Tags:
+        - Key: "ProjectID"
+          Value: "ctcd"
+        - Key: "ProjectName"
+          Value: "aws-green"
+        - Key: "Environment"
+          Value: "dev"
+        - Key: "Application"
+          Value: "cicddemo"
+        - Key: "Sub-Application"
+          Value: "ECC demo server"
+        - Key: "Name"
+          Value: "demoec2"
+
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs:
+            VolumeType: gp3
+            VolumeSize: 20
+            DeleteOnTermination: 'true'
+            Encrypted: 'true'
+        
