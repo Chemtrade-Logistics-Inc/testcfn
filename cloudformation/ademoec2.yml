@@ -6,7 +6,7 @@ Parameters:
     Default: "us-east-1"
 
   AZToDeploy:
-    Type: AWS::EC2::AvailabilityZone::Name
+    Default: us-east-1a
 
   VpcId: 
     Type: String
