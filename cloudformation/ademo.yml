@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: "Cloud formation template for security group"
+Parameters:
+  Environment:
+    Description: Environment Name
+    Type: String
+  mysgname:
+    Description: "security group name"
+    Type: String
+    Default: ctl-test-cfn-sg-demo1
+  myvpcname:
+    Description: "vpc name name"
+    Type: String
+    Default: vpc-0f6a958792a2d3c83
+Resources:
+  CTLHTTPSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "SG for Prod Mobility environment test"
+      GroupName: !Ref mysgname
+      VpcId: !Ref myvpcname
+      Tags:
+        - Key: "projectid"
+          Value: "ctcd"
+        - Key: "projectname"
+          Value: "aws-green"
+        - Key: "environment"
+          Value: "production"
+        - Key: "application"
+          Value: "sap"
+        - Key: "application-env"
+          Value: !Ref Environment
+       
+       
+      SecurityGroupIngress:
+      - CidrIp: 0.0.0.0/0
+        FromPort: 80
+        IpProtocol: tcp
+        ToPort: 80
