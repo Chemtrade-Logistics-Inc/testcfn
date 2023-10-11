@@ -7,7 +7,7 @@ Parameters:
     Default: test
   mybucketName: 
     Type: String
-    Default: devopstestoct10
+    Default: devopstestoct101
 Resources:
   S3Bucket:
     DeletionPolicy: Retain
