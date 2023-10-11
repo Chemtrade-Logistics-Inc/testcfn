@@ -1,8 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: CloudFormation template for s3 bucket
-stackfilevar:
-    stack-name: tests3bucketdemo10
-    stack-file: ./cloudformation/s3demo.yml
 Parameters:
   Environment:
     Description: Environment Name
