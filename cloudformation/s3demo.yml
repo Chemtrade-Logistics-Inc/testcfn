@@ -4,6 +4,7 @@ Parameters:
   Environment:
     Description: Environment Name
     Type: String
+    Default: Test
   mybucketName: 
     Type: String
     Default: devopstestoct10
