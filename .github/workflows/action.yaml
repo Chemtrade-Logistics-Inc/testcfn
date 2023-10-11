@@ -78,6 +78,8 @@ jobs:
     # Deploy to AWS CloudFormation
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
+      environment:
+        name: test
       with:
           name:  ${{ secrets.STACK_NAME }}
           template: ${{secrets.STACK_FILE}}
