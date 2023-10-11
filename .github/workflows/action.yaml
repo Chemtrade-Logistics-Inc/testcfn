@@ -53,6 +53,8 @@ jobs:
   deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    environment:
+        name: test
     needs: cfn-diff
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -78,8 +80,6 @@ jobs:
     # Deploy to AWS CloudFormation
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
-      environment:
-        name: test
       with:
           name:  ${{ secrets.STACK_NAME }}
           template: ${{secrets.STACK_FILE}}
